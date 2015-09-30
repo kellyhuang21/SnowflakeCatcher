@@ -1,22 +1,28 @@
 Snowflake [] dots;
 void setup()
 {
+
   size(800,800);
+  frameRate(40);
   background(0);
   dots = new Snowflake[100];
   for(int i=0; i<dots.length; i++){
-      dots[i] = new Snowflake();
+      dots[i] = new Snowflake(false);
   }
 }
 void draw()
 {
-
   for(int i=0; i<dots.length; i++){
+    
+    
     dots[i].erase();
     dots[i].lookDown();
     dots[i].move();
-    dots[i].wrap();
-    dots[i].show();
+    dots[i].wrap();  
+    dots[i].show(); 
+    if(isMoving==true){
+
+    }
   }
 }
 void mouseDragged()
