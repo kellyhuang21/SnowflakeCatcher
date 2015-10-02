@@ -1,13 +1,15 @@
 Snowflake [] dots;
+int ellipseSize=10;
 void setup()
 {
 
   size(800,800);
   frameRate(40);
   background(0);
-  dots = new Snowflake[100];
+  noStroke();
+  dots = new Snowflake[300];
   for(int i=0; i<dots.length; i++){
-      dots[i] = new Snowflake(false);
+      dots[i] = new Snowflake();
   }
 }
 void draw()
@@ -16,22 +18,22 @@ void draw()
     
     
     dots[i].erase();
+    
     dots[i].lookDown();
     dots[i].move();
-    dots[i].wrap();  
-    dots[i].show(); 
-    if(isMoving==true){
+    dots[i].wrap(); 
+    dots[i].show();
+ 
+     
 
-    }
   }
 }
 void mouseDragged()
-{
-  if(mousePressed == true){
-    fill(155);
-    noStroke();
-    ellipse(mouseX, mouseY, 10,10);
-  }
+{   
+    stroke(255,116,23);
+    strokeWeight(5);
+   line(pmouseX, pmouseY, mouseX, mouseY);
+   noStroke();
 }
 
 class Snowflake
@@ -49,11 +51,11 @@ class Snowflake
   void show()
   {
     fill(255);
-    ellipse(x,y,5,5);
+    ellipse(x,y,ellipseSize,ellipseSize);
   }
   void lookDown()
   {
-    if((y<height&&y>0)&&(get(x,y+8)!=0)){
+    if((y<height&&y>0)&&(get(x,y+8)!=color(0))){
       isMoving = false;
     }
     else {
@@ -63,7 +65,7 @@ class Snowflake
   void erase()
   {
     fill(0);
-    ellipse(x,y,7,7);
+    ellipse(x,y,ellipseSize+2,ellipseSize+2);
   }
   void move()
   {
@@ -73,7 +75,7 @@ class Snowflake
   }
   void wrap()
   {
-      if(y>height){
+      if(y>height-9){
         y=0;
         x=(int)(Math.random()*width);
       }
