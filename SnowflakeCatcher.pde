@@ -4,8 +4,8 @@ PImage minion;
 PImage bananabunch;
 Snowflake [] dots;
 int ellipseSize=10;
-int fade =0;
 boolean countr = false;
+int dotsDestroyed = 0;
 void setup()
 {
 
@@ -32,8 +32,13 @@ void draw()
     dots[i].move();
     dots[i].wrap(); 
     dots[i].show();
+    textSize(20);
+        fill(0);
+        rect(710,35,65,25);
+        fill(255, 0,0 );
+        text("Dots Destroyed: "+ dotsDestroyed, 550,50);
+        
   }
-  fade++;
   //reload();
   mouse();
 }
@@ -51,11 +56,15 @@ void reload(){
   
 void mouse()
 {   
-    stroke(255,116,23,fade);
-    strokeWeight(5);
+    stroke(255,116,23);
+    strokeWeight(8);
    //line(pmouseX, pmouseY, mouseX, mouseY);
    bananabunch.resize(30,30);
-    image(bananabunch, mouseX,mouseY);
+    //image(bananabunch, mouseX,mouseY);
+    fill(0);
+    ellipse(mouseX, mouseY, 40,40);
+    stroke(0);
+    ellipse(pmouseX, pmouseY, 42,42);
    noStroke();
 }
 
@@ -80,11 +89,12 @@ class Snowflake
   }
   void lookDown()
   {
-    if((y<height&&y>0)&&(get(x,y+8)!=color(0))){
+    if((y<height&&y>0)&&(get(x,y+8)!=color(0))||(get(x,y+1)!=color(255))){
       isMoving = false;
       if(isMoving == false){
         y=0;
         x=(int)(Math.random()*width);
+        dotsDestroyed++;
       }
     }
     else {
@@ -111,5 +121,4 @@ class Snowflake
   }
   
 }
-
 
