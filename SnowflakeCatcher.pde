@@ -8,6 +8,7 @@ void setup()
 
   size(800,800);
   background(0);
+  frameRate(40);
   noStroke();
   dots = new Snowflake[300];
   for(int i=0; i<dots.length; i++){
