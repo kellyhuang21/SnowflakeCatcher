@@ -89,14 +89,15 @@ class Snowflake
   }
   void lookDown()
   {
-    if((y<height&&y>0)&&(get(x,y+8)!=color(0))||(get(x,y+1)!=color(255))){
+    if((y<height&&y>100)&&(get(x,y+8)!=color(0))){
       isMoving = false;
       if(isMoving == false){
-        y=0;
+        y=100;
         x=(int)(Math.random()*width);
         dotsDestroyed++;
       }
     }
+    
     else {
       isMoving =true;
     }
@@ -115,7 +116,7 @@ class Snowflake
   void wrap()
   {
       if(y>height-9){
-        y=0;
+        y=100;
         x=(int)(Math.random()*width);
       }
   }
